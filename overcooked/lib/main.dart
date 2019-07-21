@@ -67,6 +67,12 @@ class RecipeListState extends State<RecipeList> {
                         itemCount: snapshot.data.recipes.length,
                         itemBuilder: (context, i) {
                             return ListTile(
+                                onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => RecipeView()),
+                                    );
+                                },
                                 title: Text(snapshot.data.recipes[i].title)
                             );
                         }
@@ -83,4 +89,23 @@ class RecipeListState extends State<RecipeList> {
 class RecipeList extends StatefulWidget {
     @override
     RecipeListState createState() => RecipeListState();
+}
+
+class RecipeView extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+                title: Text("Second Route"),
+            ),
+            body: Center(
+                child: RaisedButton(
+                    onPressed: () {
+                        Navigator.pop(context);
+                    },
+                    child: Text('Go back!'),
+                ),
+            ),
+        );
+    }
 }
