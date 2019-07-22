@@ -66,6 +66,9 @@ class RecipeView extends StatelessWidget {
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
                         final recipe = snapshot.data.data.recipe;
+                        final servesMakesHeading = recipe.serves != null && recipe.serves >= 0 ? "Serves" : "Makes";
+                        final servesMakesValue = recipe.serves != null && recipe.serves >= 0 ? recipe.serves : recipe.makes;
+
                         return SingleChildScrollView(
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,6 +79,8 @@ class RecipeView extends StatelessWidget {
                                     Text(recipe.prepTime.toString()),
                                     Text("COOK"),
                                     Text(recipe.cookTime.toString()),
+                                    Text(servesMakesHeading),
+                                    Text(servesMakesValue.toString()),
                                     Text("METHOD", style: TextStyle(
                                         fontSize: 16.0
                                     )),
