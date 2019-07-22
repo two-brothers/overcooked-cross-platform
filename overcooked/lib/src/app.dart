@@ -29,7 +29,7 @@ class App extends StatelessWidget {
     }
 }
 
-class RecipeListState extends State<RecipeList> {
+class RecipeList extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return FutureBuilder<RecipeModel>(
@@ -57,11 +57,6 @@ class RecipeListState extends State<RecipeList> {
             }
         );
     }
-}
-
-class RecipeList extends StatefulWidget {
-    @override
-    RecipeListState createState() => RecipeListState();
 }
 
 class RecipeView extends StatelessWidget {
