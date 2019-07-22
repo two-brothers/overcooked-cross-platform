@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import './models/recipe_list_model.dart';
 import './models/recipe_model.dart';
-import 'dart:async';
-import 'dart:convert';
-
-Future<RecipeListModel> fetchRecipes() async {
-    final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/at/0');
-
-    if (response.statusCode == 200) {
-        return RecipeListModel.fromJson(json.decode(response.body));
-    } else {
-        throw Exception('Failed to load post');
-    }
-}
+import './services/api.dart';
 
 class App extends StatelessWidget {
     @override
@@ -34,7 +22,7 @@ class RecipeList extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return FutureBuilder<RecipeListModel>(
-            future: fetchRecipes(),
+            future: Api.getRecipeList(),
             builder: (context, snapshot) {
                 if (snapshot.hasData) {
                     return ListView.builder(
