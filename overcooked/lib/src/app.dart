@@ -28,7 +28,7 @@ class RecipeList extends StatelessWidget {
                     return ListView.builder(
                         itemCount: snapshot.data.recipes.length,
                         itemBuilder: (context, i) {
-                            final recipe = snapshot.data.recipes[i]
+                            final recipe = snapshot.data.recipes[i];
                             return ListTile(
                                 onTap: () {
                                     Navigator.push(
@@ -66,7 +66,13 @@ class RecipeView extends StatelessWidget {
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
                         final recipe = snapshot.data.data.recipe;
-                        return Text(recipe.title);
+                        return Flex(
+                            direction: Axis.vertical,
+                            children: <Widget>[
+                                Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
+                                Text(recipe.title)
+                            ]
+                        );
                     } else if (snapshot.hasError) {
                         return Text("${snapshot.error}");
                     }
