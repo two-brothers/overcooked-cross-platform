@@ -66,11 +66,18 @@ class RecipeView extends StatelessWidget {
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
                         final recipe = snapshot.data.data.recipe;
-                        return Flex(
-                            direction: Axis.vertical,
+                        return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                                 Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
-                                Text(recipe.title)
+                                Text(recipe.title.toUpperCase()),
+                                Text("METHOD", style: TextStyle(
+                                    fontSize: 16.0
+                                )),
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: recipe.method.map((item) => new Text(item)).toList()
+                                )
                             ]
                         );
                     } else if (snapshot.hasError) {
