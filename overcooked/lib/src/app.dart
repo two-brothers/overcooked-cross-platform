@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './models/recipe_list_model.dart';
 import './models/recipe_model.dart';
+import './models/recipe_response_model.dart';
 import './services/api.dart';
 
 class App extends StatelessWidget {
@@ -60,14 +61,18 @@ class RecipeView extends StatelessWidget {
             appBar: AppBar(
                 title: Text(recipeModel.title),
             ),
-            body: Center(
-                child: RaisedButton(
-                    onPressed: () {
-                        Navigator.pop(context);
-                    },
-                    child: Text('Go back!'),
-                ),
-            ),
+            body: FutureBuilder<RecipeResponseModel>(
+                future: Api.getRecipe(),
+                builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                        final recipe = snapshot.data.data.recipe;
+                        return Text(recipe.title);
+                    } else if (snapshot.hasError) {
+                        return Text("${snapshot.error}");
+                    }
+                    return CircularProgressIndicator();
+                }
+            )
         );
     }
 }
