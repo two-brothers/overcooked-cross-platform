@@ -15,8 +15,8 @@ class Api {
         }
     }
 
-    static Future<RecipeResponseModel> getRecipe() async {
-        final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/5cea62603a8928544e942738');
+    static Future<RecipeResponseModel> getRecipe(String id) async {
+        final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/$id');
 
         if (response.statusCode == 200) {
             print(response.body);

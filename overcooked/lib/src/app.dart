@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './models/recipe_list_model.dart';
-import './models/recipe_model.dart';
 import './models/recipe_response_model.dart';
 import './services/api.dart';
 
@@ -29,11 +28,12 @@ class RecipeList extends StatelessWidget {
                     return ListView.builder(
                         itemCount: snapshot.data.recipes.length,
                         itemBuilder: (context, i) {
+                            final recipe = snapshot.data.recipes[i]
                             return ListTile(
                                 onTap: () {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => RecipeView(recipeModel: snapshot.data.recipes[i])),
+                                        MaterialPageRoute(builder: (context) => RecipeView(id: recipe.id)),
                                     );
                                 },
                                 title: Text(snapshot.data.recipes[i].title)
@@ -51,18 +51,18 @@ class RecipeList extends StatelessWidget {
 
 class RecipeView extends StatelessWidget {
 
-    final RecipeModel recipeModel;
+    final String id;
 
-    const RecipeView({ Key key, @required this.recipeModel }) : super(key: key);
+    const RecipeView({ Key key, @required this.id }) : super(key: key);
 
     @override
     Widget build(BuildContext context) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(recipeModel.title),
+                title: Text("recipe"),
             ),
             body: FutureBuilder<RecipeResponseModel>(
-                future: Api.getRecipe(),
+                future: Api.getRecipe(id),
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
                         final recipe = snapshot.data.data.recipe;
