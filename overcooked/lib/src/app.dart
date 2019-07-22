@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import './models/recipe_list_model.dart';
 import './models/recipe_model.dart';
 import 'dart:async';
 import 'dart:convert';
 
-Future<RecipeModel> fetchRecipes() async {
+Future<RecipeListModel> fetchRecipes() async {
     final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/at/0');
 
     if (response.statusCode == 200) {
-        return RecipeModel.fromJson(json.decode(response.body));
+        return RecipeListModel.fromJson(json.decode(response.body));
     } else {
         throw Exception('Failed to load post');
     }
@@ -32,7 +33,7 @@ class App extends StatelessWidget {
 class RecipeList extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
-        return FutureBuilder<RecipeModel>(
+        return FutureBuilder<RecipeListModel>(
             future: fetchRecipes(),
             builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -43,7 +44,7 @@ class RecipeList extends StatelessWidget {
                                 onTap: () {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => RecipeView()),
+                                        MaterialPageRoute(builder: (context) => RecipeView(recipeModel: snapshot.data.recipes[i])),
                                     );
                                 },
                                 title: Text(snapshot.data.recipes[i].title)
@@ -60,11 +61,16 @@ class RecipeList extends StatelessWidget {
 }
 
 class RecipeView extends StatelessWidget {
+
+    final RecipeModel recipeModel;
+
+    const RecipeView({ Key key, @required this.recipeModel }) : super(key: key);
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
             appBar: AppBar(
-                title: Text("Second Route"),
+                title: Text(recipeModel.title),
             ),
             body: Center(
                 child: RaisedButton(
