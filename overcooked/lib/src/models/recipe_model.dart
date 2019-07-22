@@ -37,14 +37,17 @@ class RecipeModel {
 }
 
 class IngredientSection {
+    final String heading;
     final List<Ingredient> ingredients;
 
     IngredientSection({
+        this.heading,
         this.ingredients
     });
 
     factory IngredientSection.fromJson(Map<String, dynamic> json) {
         return IngredientSection(
+            heading: json['heading'],
             ingredients: (json['ingredients'] as List).map((i) => Ingredient.fromJson(i)).toList()
         );
     }

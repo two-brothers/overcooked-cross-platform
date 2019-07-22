@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe_response_model.dart';
+import '../models/recipe_model.dart';
 import '../services/api.dart';
 
 class RecipeView extends StatelessWidget {
@@ -34,6 +35,10 @@ class RecipeView extends StatelessWidget {
                                     Text(recipe.cookTime.toString()),
                                     Text(servesMakesHeading),
                                     Text(servesMakesValue.toString()),
+                                    Text("INGREDIENTS", style: TextStyle(
+                                        fontSize: 16.0
+                                    )),
+                                    ingredientSections(recipe.ingredientSections),
                                     Text("METHOD", style: TextStyle(
                                         fontSize: 16.0
                                     )),
@@ -53,4 +58,16 @@ class RecipeView extends StatelessWidget {
             )
         );
     }
+}
+
+Widget ingredientSections(List<IngredientSection> ingredientSections) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: ingredientSections.map((section) => new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+                if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold))
+            ]
+        )).toList(),
+    );
 }
