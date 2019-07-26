@@ -14,14 +14,29 @@ class RecipeList extends StatelessWidget {
                         itemCount: snapshot.data.recipes.length,
                         itemBuilder: (context, i) {
                             final recipe = snapshot.data.recipes[i];
-                            return ListTile(
+                            return GestureDetector(
                                 onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) => RecipeView(id: recipe.id)),
                                     );
                                 },
-                                title: Text(snapshot.data.recipes[i].title)
+                                child: new Card(
+                                    child: (
+                                        Column(
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            children: <Widget>[
+                                                Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
+                                                Text(
+                                                    recipe.title,
+                                                    style: new TextStyle(
+                                                        fontSize: 16.0
+                                                    ),
+                                                )
+                                            ]
+                                        )
+                                    )
+                                )
                             );
                         }
                     );
