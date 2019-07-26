@@ -6,6 +6,9 @@ class App extends StatelessWidget {
     Widget build(BuildContext context) {
         return MaterialApp(
             title: 'Overcooked',
+            theme: ThemeData(
+                fontFamily: 'Lato',
+            ),
             home: Scaffold(
                 appBar: AppBar(
                     title: Text('Overcooked'),
