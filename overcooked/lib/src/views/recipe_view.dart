@@ -28,7 +28,16 @@ class RecipeView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: <Widget>[
                                     Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
-                                    Text(recipe.title.toUpperCase()),
+                                    Container(
+                                        padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                                        child: Text(
+                                            recipe.title.toUpperCase(),
+                                            textAlign: TextAlign.center,
+                                            style: new TextStyle(
+                                                fontSize: 20.0
+                                            )
+                                        ),
+                                    ),
                                     Text("PREP"),
                                     Text(recipe.prepTime.toString()),
                                     Text("COOK"),
