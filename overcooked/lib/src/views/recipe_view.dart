@@ -49,8 +49,13 @@ class RecipeView extends StatelessWidget {
                                                 Text(recipe.prepTime.toString()),
                                                 Text("COOK"),
                                                 Text(recipe.cookTime.toString()),
-                                                Text(servesMakesHeading.toUpperCase()),
-                                                Text(servesMakesValue.toString()),
+                                                Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                        Text(servesMakesHeading.toUpperCase()),
+                                                        Text(servesMakesValue.toString())
+                                                    ],
+                                                ),
                                                 Text("INGREDIENTS", style: TextStyle(
                                                     fontSize: 16
                                                 )),
