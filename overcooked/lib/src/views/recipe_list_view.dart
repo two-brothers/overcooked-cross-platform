@@ -27,14 +27,27 @@ class RecipeList extends StatelessWidget {
                                         children: <Widget>[
                                             Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
                                             Positioned(
-                                                bottom: 16,
-                                                left: 16,
-                                                child: Text(
-                                                    recipe.title.toUpperCase(),
-                                                    style: new TextStyle(
-                                                        fontSize: 16.0,
-                                                        color: Color(0xFFFFFFFF)
-                                                    ),
+                                                bottom: 0,
+                                                left: 0,
+                                                width: MediaQuery.of(context).size.width,
+                                                height: 80,
+                                                child: (
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          gradient: LinearGradient(
+                                                              begin: Alignment.bottomCenter,
+                                                              end: Alignment.topCenter,
+                                                              colors: [Colors.black87, Colors.transparent]
+                                                          )
+                                                      ),
+                                                      child: Text(
+                                                          recipe.title.toUpperCase(),
+                                                          style: new TextStyle(
+                                                              fontSize: 16.0,
+                                                              color: Color(0xFFFFFFFF)
+                                                          ),
+                                                      ),
+                                                    )
                                                 )
                                             )
                                         ]
