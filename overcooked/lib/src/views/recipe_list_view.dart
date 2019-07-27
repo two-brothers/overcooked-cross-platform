@@ -12,6 +12,7 @@ class RecipeList extends StatelessWidget {
                 if (snapshot.hasData) {
                     return ListView.builder(
                         itemCount: snapshot.data.recipes.length,
+                        padding: EdgeInsets.all(4),
                         itemBuilder: (context, i) {
                             final recipe = snapshot.data.recipes[i];
                             return GestureDetector(
@@ -22,19 +23,20 @@ class RecipeList extends StatelessWidget {
                                     );
                                 },
                                 child: new Card(
-                                    child: (
-                                        Column(
-                                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                                            children: <Widget>[
-                                                Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
-                                                Text(
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: <Widget>[
+                                            Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
+                                            Padding(
+                                                padding: EdgeInsets.all(8),
+                                                child: Text(
                                                     recipe.title,
                                                     style: new TextStyle(
                                                         fontSize: 16.0
                                                     ),
                                                 )
-                                            ]
-                                        )
+                                            )
+                                        ]
                                     )
                                 )
                             );
