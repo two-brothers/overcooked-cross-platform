@@ -34,7 +34,7 @@ class RecipeView extends StatelessWidget {
                                             crossAxisAlignment: CrossAxisAlignment.stretch,
                                             children: <Widget>[
                                                 Container(
-                                                    padding: EdgeInsets.only(bottom: 8),
+                                                    margin: EdgeInsets.only(bottom: 8),
                                                     child: Text(
                                                         recipe.title.toUpperCase(),
                                                         textAlign: TextAlign.center,
@@ -49,15 +49,17 @@ class RecipeView extends StatelessWidget {
                                                 Text(recipe.prepTime.toString()),
                                                 Text("COOK"),
                                                 Text(recipe.cookTime.toString()),
-                                                Text(servesMakesHeading),
+                                                Text(servesMakesHeading.toUpperCase()),
                                                 Text(servesMakesValue.toString()),
                                                 Text("INGREDIENTS", style: TextStyle(
                                                     fontSize: 16
                                                 )),
+                                                Divider(),
                                                 ingredientSections(recipe.ingredientSections),
                                                 Text("METHOD", style: TextStyle(
                                                     fontSize: 16
                                                 )),
+                                                Divider(),
                                                 methodList(recipe.method)
                                             ]
                                         )
@@ -91,18 +93,18 @@ Widget ingredientSections(List<IngredientSection> ingredientSections) {
 Widget methodList(List<String> methodList) {
     return Column(
         children: methodList.asMap().map((i, item) => MapEntry(i, Container(
-            padding: EdgeInsets.only(bottom: 16),
+            margin: EdgeInsets.only(bottom: 16),
             child: (
                 Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(right: 16),
-                        child: Text((i + 1).toString()),
-                      ),
-                      Expanded(
-                          child: Text(item)
-                      )
+                        Padding(
+                            padding: EdgeInsets.only(right: 16),
+                            child: Text((i + 1).toString()),
+                        ),
+                        Expanded(
+                            child: Text(item)
+                        )
                     ]
                 )
             )
