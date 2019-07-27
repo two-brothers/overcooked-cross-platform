@@ -29,31 +29,39 @@ class RecipeView extends StatelessWidget {
                                 children: <Widget>[
                                     Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
                                     Container(
-                                        padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
-                                        child: Text(
-                                            recipe.title.toUpperCase(),
-                                            textAlign: TextAlign.center,
-                                            style: new TextStyle(
-                                                fontFamily: 'Lato',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 20.0
-                                            )
-                                        ),
-                                    ),
-                                    Text("PREP"),
-                                    Text(recipe.prepTime.toString()),
-                                    Text("COOK"),
-                                    Text(recipe.cookTime.toString()),
-                                    Text(servesMakesHeading),
-                                    Text(servesMakesValue.toString()),
-                                    Text("INGREDIENTS", style: TextStyle(
-                                        fontSize: 16
-                                    )),
-                                    ingredientSections(recipe.ingredientSections),
-                                    Text("METHOD", style: TextStyle(
-                                        fontSize: 16
-                                    )),
-                                    methodList(recipe.method)
+                                        padding: EdgeInsets.all(16),
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            children: <Widget>[
+                                                Container(
+                                                    padding: EdgeInsets.only(bottom: 8),
+                                                    child: Text(
+                                                        recipe.title.toUpperCase(),
+                                                        textAlign: TextAlign.center,
+                                                        style: new TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.w300,
+                                                            fontSize: 20.0
+                                                        )
+                                                    ),
+                                                ),
+                                                Text("PREP"),
+                                                Text(recipe.prepTime.toString()),
+                                                Text("COOK"),
+                                                Text(recipe.cookTime.toString()),
+                                                Text(servesMakesHeading),
+                                                Text(servesMakesValue.toString()),
+                                                Text("INGREDIENTS", style: TextStyle(
+                                                    fontSize: 16
+                                                )),
+                                                ingredientSections(recipe.ingredientSections),
+                                                Text("METHOD", style: TextStyle(
+                                                    fontSize: 16
+                                                )),
+                                                methodList(recipe.method)
+                                            ]
+                                        )
+                                    )
                                 ]
                             )
                         );
