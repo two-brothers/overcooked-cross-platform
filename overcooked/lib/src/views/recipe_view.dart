@@ -82,12 +82,22 @@ Widget ingredientSections(List<IngredientSection> ingredientSections) {
 
 Widget methodList(List<String> methodList) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: methodList.map((item) => new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-                Text(item)
-            ]
-        )).toList(),
+        children: methodList.asMap().map((i, item) => MapEntry(i, Container(
+            padding: EdgeInsets.only(bottom: 16),
+            child: (
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: Text((i + 1).toString()),
+                      ),
+                      Expanded(
+                          child: Text(item)
+                      )
+                    ]
+                )
+            )
+        ))).values.toList(),
     );
 }
