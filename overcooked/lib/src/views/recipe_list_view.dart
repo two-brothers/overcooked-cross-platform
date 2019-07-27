@@ -23,16 +23,17 @@ class RecipeList extends StatelessWidget {
                                     );
                                 },
                                 child: new Card(
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    child: Stack(
                                         children: <Widget>[
                                             Image.network("https://overcooked.2brothers.tech/${recipe.imageUrl}"),
-                                            Padding(
-                                                padding: EdgeInsets.all(8),
+                                            Positioned(
+                                                bottom: 16,
+                                                left: 16,
                                                 child: Text(
-                                                    recipe.title,
+                                                    recipe.title.toUpperCase(),
                                                     style: new TextStyle(
-                                                        fontSize: 16.0
+                                                        fontSize: 16.0,
+                                                        color: Color(0xFFFFFFFF)
                                                     ),
                                                 )
                                             )
