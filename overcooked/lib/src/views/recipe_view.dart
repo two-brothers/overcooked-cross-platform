@@ -47,16 +47,13 @@ class RecipeView extends StatelessWidget {
                                     Text(servesMakesHeading),
                                     Text(servesMakesValue.toString()),
                                     Text("INGREDIENTS", style: TextStyle(
-                                        fontSize: 16.0
+                                        fontSize: 16
                                     )),
                                     ingredientSections(recipe.ingredientSections),
                                     Text("METHOD", style: TextStyle(
-                                        fontSize: 16.0
+                                        fontSize: 16
                                     )),
-                                    Column(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: recipe.method.map((item) => new Text(item)).toList()
-                                    )
+                                    methodList(recipe.method)
                                 ]
                             )
                         );
@@ -78,6 +75,18 @@ Widget ingredientSections(List<IngredientSection> ingredientSections) {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
                 if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold))
+            ]
+        )).toList(),
+    );
+}
+
+Widget methodList(List<String> methodList) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: methodList.map((item) => new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+                Text(item)
             ]
         )).toList(),
     );
