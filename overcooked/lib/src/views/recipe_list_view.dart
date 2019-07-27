@@ -33,20 +33,30 @@ class RecipeList extends StatelessWidget {
                                                 height: 80,
                                                 child: (
                                                     Container(
-                                                      decoration: BoxDecoration(
-                                                          gradient: LinearGradient(
-                                                              begin: Alignment.bottomCenter,
-                                                              end: Alignment.topCenter,
-                                                              colors: [Colors.black87, Colors.transparent]
-                                                          )
-                                                      ),
-                                                      child: Text(
-                                                          recipe.title.toUpperCase(),
-                                                          style: new TextStyle(
-                                                              fontSize: 16.0,
-                                                              color: Color(0xFFFFFFFF)
-                                                          ),
-                                                      ),
+                                                        decoration: BoxDecoration(
+                                                            gradient: LinearGradient(
+                                                                begin: Alignment.bottomCenter,
+                                                                end: Alignment.topCenter,
+                                                                colors: [Colors.black87, Colors.transparent]
+                                                            )
+                                                        ),
+                                                        child: Padding(
+                                                            padding: EdgeInsets.all(100),
+                                                        )
+                                                    )
+                                                )
+                                            ),
+                                            Positioned(
+                                                bottom: 16,
+                                                left: 16,
+                                                width: MediaQuery.of(context).size.width,
+                                                child: (
+                                                    Text(
+                                                        recipe.title.toUpperCase(),
+                                                        style: new TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Color(0xFFFFFFFF)
+                                                        ),
                                                     )
                                                 )
                                             )
