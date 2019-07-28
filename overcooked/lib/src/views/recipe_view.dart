@@ -57,10 +57,25 @@ class RecipeView extends StatelessWidget {
                                                         )
                                                     ),
                                                 ),
-                                                Text("PREP"),
-                                                Text(getFormattedRecipeTime(recipe.prepTime)),
-                                                Text("COOK"),
-                                                Text(getFormattedRecipeTime(recipe.cookTime)),
+                                                Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: <Widget>[
+                                                        Container(
+                                                            margin: EdgeInsets.only(right: 4),
+                                                            child: Text("PREP"),
+                                                        ),
+                                                        Container(
+                                                            margin: EdgeInsets.only(right: 4),
+                                                            child: Text(getFormattedRecipeTime(recipe.prepTime)),
+                                                        ),
+                                                        Text(" - "),
+                                                        Container(
+                                                            margin: EdgeInsets.only(right: 4),
+                                                            child: Text("COOK"),
+                                                        ),
+                                                        Text(getFormattedRecipeTime(recipe.cookTime)),
+                                                    ]
+                                                ),
                                                 Row(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: <Widget>[
