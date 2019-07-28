@@ -39,8 +39,6 @@ class RecipeView extends StatelessWidget {
                                                         recipe.title.toUpperCase(),
                                                         textAlign: TextAlign.center,
                                                         style: new TextStyle(
-                                                            fontFamily: 'Lato',
-                                                            fontWeight: FontWeight.w300,
                                                             fontSize: 20.0
                                                         )
                                                     ),
@@ -52,7 +50,10 @@ class RecipeView extends StatelessWidget {
                                                 Row(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: <Widget>[
-                                                        Text(servesMakesHeading.toUpperCase()),
+                                                        Container(
+                                                            margin: EdgeInsets.only(right: 4),
+                                                            child: Text(servesMakesHeading.toUpperCase()),
+                                                        ),
                                                         Text(servesMakesValue.toString())
                                                     ],
                                                 ),
