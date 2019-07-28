@@ -38,7 +38,7 @@ class RecipeModel {
 
 class IngredientSection {
     final String heading;
-    final List<Ingredient> ingredients;
+    final List<dynamic> ingredients;
 
     IngredientSection({
         this.heading,
@@ -61,8 +61,43 @@ class Ingredient {
     });
 
     factory Ingredient.fromJson(Map<String, dynamic> json) {
-        return Ingredient(
+        /* return Ingredient(
             ingredientType: json['ingredientType']
+        );*/
+        if (json['ingredientType'] == 1) {
+            return FreeText.fromJson(json);
+        }
+        return FreeText.fromJson(json);
+    }
+}
+
+class Quantified extends Ingredient {
+    final int amount;
+
+    Quantified({
+        this.amount
+    });
+
+    factory Quantified.fromJson(Map<String, dynamic> json) {
+        return Quantified(
+            amount: json['amount']
+        );
+    }
+}
+
+class FreeText extends Ingredient {
+    final int ingredientType;
+    final String description;
+
+    FreeText({
+        this.ingredientType,
+        this.description
+    });
+
+    factory FreeText.fromJson(Map<String, dynamic> json) {
+        return FreeText(
+            ingredientType: json['ingredientType'],
+            description: json['description']
         );
     }
 }

@@ -131,10 +131,14 @@ Widget ingredientList(List<Ingredient> ingredients) {
         children: ingredients.map((ingredient) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-                if (ingredient.ingredientType == 0) Text("quantified") else Text("free text")
+                if (ingredient.ingredientType == 0) Text("quantified") else freeText(ingredient)
             ]
         )).toList(),
     );
+}
+
+Widget freeText(FreeText freeText) {
+    return Text(freeText.description);
 }
 
 Widget methodList(List<String> methodList) {
