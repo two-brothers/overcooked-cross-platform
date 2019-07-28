@@ -119,7 +119,19 @@ Widget ingredientSections(List<IngredientSection> ingredientSections) {
         children: ingredientSections.map((section) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-                if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold))
+                if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold)),
+                ingredientList(section.ingredients)
+            ]
+        )).toList(),
+    );
+}
+
+Widget ingredientList(List<Ingredient> ingredients) {
+    return Column(
+        children: ingredients.map((ingredient) => new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+                if (ingredient.ingredientType == 0) Text("quantified") else Text("free text")
             ]
         )).toList(),
     );
