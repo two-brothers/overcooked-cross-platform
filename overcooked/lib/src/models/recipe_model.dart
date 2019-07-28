@@ -1,3 +1,5 @@
+import '../lookups/lookupIngredientType.dart';
+
 class RecipeModel {
     final String id;
     final String title;
@@ -61,7 +63,7 @@ class Ingredient {
     });
 
     factory Ingredient.fromJson(Map<String, dynamic> json) {
-        if (json['ingredientType'] == 0) {
+        if (json['ingredientType'] == LookupIngredientType.QUANTIFIED.id) {
             return Quantified.fromJson(json);
         }
         return FreeText.fromJson(json);

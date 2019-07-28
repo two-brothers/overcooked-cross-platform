@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe_response_model.dart';
+import '../lookups/lookupIngredientType.dart';
 import '../models/recipe_model.dart';
 import '../services/api.dart';
 
@@ -131,7 +132,7 @@ Widget ingredientList(List<Ingredient> ingredients) {
         children: ingredients.map((ingredient) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-                if (ingredient.ingredientType == 0) Text("quantified") else freeText(ingredient)
+                if (ingredient.ingredientType == LookupIngredientType.QUANTIFIED.id) Text("quantified") else freeText(ingredient)
             ]
         )).toList(),
     );
