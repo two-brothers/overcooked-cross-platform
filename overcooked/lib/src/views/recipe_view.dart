@@ -9,6 +9,20 @@ class RecipeView extends StatelessWidget {
 
     const RecipeView({ Key key, @required this.id }) : super(key: key);
 
+    getFormattedRecipeTime(int totalTime) {
+        if (totalTime <= 0) {
+            return "NONE";
+        }
+
+        final int hours = totalTime.floor() ~/ 60;
+        final int mins = totalTime % 60;
+
+        final hourString = hours > 0 ? "${hours}H" : "";
+        final minString = mins > 0 ? "${mins}M" : "";
+
+        return hours > 0 ? "$hourString $minString" : minString;
+    }
+
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -44,9 +58,9 @@ class RecipeView extends StatelessWidget {
                                                     ),
                                                 ),
                                                 Text("PREP"),
-                                                Text(recipe.prepTime.toString()),
+                                                Text(getFormattedRecipeTime(recipe.prepTime)),
                                                 Text("COOK"),
-                                                Text(recipe.cookTime.toString()),
+                                                Text(getFormattedRecipeTime(recipe.cookTime)),
                                                 Row(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: <Widget>[
