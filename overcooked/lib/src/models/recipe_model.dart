@@ -73,16 +73,22 @@ class Ingredient {
 class Quantified extends Ingredient {
     final int ingredientType;
     final double amount;
+    final String foodId;
+    final List<int> unitIds;
 
     Quantified({
         this.ingredientType,
-        this.amount
+        this.amount,
+        this.foodId,
+        this.unitIds
     });
 
     factory Quantified.fromJson(Map<String, dynamic> json) {
         return Quantified(
             ingredientType: json['ingredientType'],
-            amount: json['amount'].toDouble()
+            amount: json['amount'].toDouble(),
+            foodId: json['foodId'],
+            unitIds: new List<int>.from(json['unitIds'])
         );
     }
 }
