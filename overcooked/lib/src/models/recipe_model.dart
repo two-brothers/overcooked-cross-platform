@@ -61,26 +61,26 @@ class Ingredient {
     });
 
     factory Ingredient.fromJson(Map<String, dynamic> json) {
-        /* return Ingredient(
-            ingredientType: json['ingredientType']
-        );*/
-        if (json['ingredientType'] == 1) {
-            return FreeText.fromJson(json);
+        if (json['ingredientType'] == 0) {
+            return Quantified.fromJson(json);
         }
         return FreeText.fromJson(json);
     }
 }
 
 class Quantified extends Ingredient {
-    final int amount;
+    final int ingredientType;
+    final double amount;
 
     Quantified({
+        this.ingredientType,
         this.amount
     });
 
     factory Quantified.fromJson(Map<String, dynamic> json) {
         return Quantified(
-            amount: json['amount']
+            ingredientType: json['ingredientType'],
+            amount: json['amount'].toDouble()
         );
     }
 }
