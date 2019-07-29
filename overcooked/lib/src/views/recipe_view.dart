@@ -34,6 +34,7 @@ class RecipeView extends StatelessWidget {
                 future: Api.getRecipe(id),
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
+                        final food = snapshot.data.data.food;
                         final recipe = snapshot.data.data.recipe;
                         final servesMakesHeading = recipe.serves != null && recipe.serves >= 0 ? "Serves" : "Makes";
                         final servesMakesValue = recipe.serves != null && recipe.serves >= 0 ? recipe.serves : recipe.makes;
@@ -91,7 +92,7 @@ class RecipeView extends StatelessWidget {
                                                     fontSize: 16
                                                 )),
                                                 Divider(),
-                                                ingredientSections(recipe.ingredientSections),
+                                                ingredientSections(recipe.ingredientSections, food),
                                                 Text("METHOD", style: TextStyle(
                                                     fontSize: 16
                                                 )),
@@ -114,32 +115,33 @@ class RecipeView extends StatelessWidget {
     }
 }
 
-Widget ingredientSections(List<IngredientSection> ingredientSections) {
+Widget ingredientSections(List<IngredientSection> ingredientSections, Map<String, Food> food) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: ingredientSections.map((section) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
                 if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold)),
-                ingredientList(section.ingredients)
+                ingredientList(section.ingredients, food)
             ]
         )).toList(),
     );
 }
 
-Widget ingredientList(List<Ingredient> ingredients) {
+Widget ingredientList(List<Ingredient> ingredients, Map<String, Food> food) {
     return Column(
         children: ingredients.map((ingredient) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-                if (ingredient.ingredientType == LookupIngredientType.QUANTIFIED.id) quantified(ingredient) else freeText(ingredient)
+                if (ingredient.ingredientType == LookupIngredientType.QUANTIFIED.id) quantified(ingredient, food) else freeText(ingredient)
             ]
         )).toList(),
     );
 }
 
-Widget quantified(Quantified quantified) {
-    return Text("quantified");
+Widget quantified(Quantified quantified, Map<String, Food> foodMap) {
+    final food = foodMap[quantified.foodId];
+    return Text("quantified: ${food.id}");
 }
 
 Widget freeText(FreeText freeText) {
