@@ -154,8 +154,16 @@ Widget quantified(Quantified quantified, Map<String, Food> foodMap) {
         return food.name.plural;
     }();
 
+    final additionalDesc = quantified.additionalDesc != null ? ", ${quantified.additionalDesc}" : null;
+
     final description = "$foodName";
-    return Text(description);
+
+    return Row(
+        children: <Widget>[
+            Text(description),
+            if (additionalDesc != null) Text(additionalDesc, style: TextStyle(fontStyle: FontStyle.italic)),
+        ],
+    );
 }
 
 Widget freeText(FreeText freeText) {
