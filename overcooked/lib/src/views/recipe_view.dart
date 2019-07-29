@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/recipe_response_model.dart';
 import '../lookups/lookupIngredientType.dart';
+import '../lookups/lookupIngredientUnitType.dart';
 import '../models/recipe_model.dart';
 import '../services/api.dart';
 
@@ -141,7 +142,20 @@ Widget ingredientList(List<Ingredient> ingredients, Map<String, Food> food) {
 
 Widget quantified(Quantified quantified, Map<String, Food> foodMap) {
     final food = foodMap[quantified.foodId];
-    return Text("quantified: ${food.id}");
+    final defaultQuantity = 6;
+    final activeQuantity = 6;
+
+    final foodName = () {
+        final int lastUnitId = food.conversions.last.unitId;
+        if (lastUnitId == LookupIngredientUnitType.SLICE.id ||
+            lastUnitId == LookupIngredientUnitType.SINGULAR.id && quantified.amount / defaultQuantity * activeQuantity <= 1) {
+            return food.name.singular;
+        }
+        return food.name.plural;
+    }();
+
+    final description = "$foodName";
+    return Text(description);
 }
 
 Widget freeText(FreeText freeText) {
