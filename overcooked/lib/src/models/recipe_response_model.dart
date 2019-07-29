@@ -14,12 +14,38 @@ class RecipeResponseModel {
 
 class Data {
     final RecipeModel recipe;
+    final Map<String, Food> food;
 
-    Data({ this.recipe });
+    Data({
+        this.recipe,
+        this.food
+    });
 
     factory Data.fromJson(Map<String, dynamic> json) {
+        Map<String, Food> foodMap = new Map();
+
+        json['food'].forEach((k,v) {
+            foodMap.addAll({ k: Food.fromJson(v)});
+        });
+
         return Data(
-            recipe: RecipeModel.fromJson(json['recipe'])
+            recipe: RecipeModel.fromJson(json['recipe']),
+            food: foodMap
+        );
+    }
+}
+
+class Food {
+
+    final String id;
+
+    Food({
+        this.id
+    });
+
+    factory Food.fromJson(Map<String, dynamic> json) {
+        return Food(
+            id: json['id'],
         );
     }
 }
