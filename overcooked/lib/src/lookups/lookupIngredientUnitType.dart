@@ -15,6 +15,26 @@ class LookupIngredientUnitType {
     static const _Slice SLICE = _Slice(12, " slice of ", " slices of ");
     static const _Kilograms KILOGRAMS = _Kilograms(101, "kg ", "kg ");
     static const _Litres LITERS = _Litres(201, "L ", "L ");
+
+    static dataLookup(int id) {
+        if (id == NONE.id)              { return NONE; }
+        if (id == NONE.id)              { return NONE; }
+        if (id == SINGULAR.id)          { return SINGULAR; }
+        if (id == GRAMS.id)             { return GRAMS; }
+        if (id == MILLILITERS.id)       { return MILLILITERS; }
+        if (id == TSP.id)               { return TSP; }
+        if (id == TBSP.id)              { return TBSP; }
+        if (id == CUPS.id)              { return CUPS; }
+        if (id == BUNCH.id)             { return BUNCH; }
+        if (id == RASHER.id)            { return RASHER; }
+        if (id == HEAD.id)              { return HEAD; }
+        if (id == SPRIG.id)             { return SPRIG; }
+        if (id == STALK.id)             { return STALK; }
+        if (id == SHEET.id)             { return SHEET; }
+        if (id == SLICE.id)             { return SLICE; }
+        if (id == KILOGRAMS.id)         { return KILOGRAMS; }
+        if (id == LITERS.id)            { return LITERS; }
+    }
 }
 
 class _None {

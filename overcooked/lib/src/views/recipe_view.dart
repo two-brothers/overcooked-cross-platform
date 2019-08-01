@@ -145,6 +145,8 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
     final activeQuantity = 6;
 
     final food = foodMap[item.foodId];
+
+    var isFirstUnit = true;
     final units = item.unitIds.fold("", (acc, element) {
         final foodConversion = food.conversions.firstWhere((conversion) => conversion.unitId == element, orElse: () => null);
 
@@ -154,9 +156,37 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
 
         final amount = item.unitIds.length > 1 ? item.amount * foodConversion.ratio : item.amount;
 
-        return "$acc $amount";
+        final foodQuantity = foodConversion.unitId == LookupIngredientUnitType.GRAMS.id ||
+            foodConversion.unitId == LookupIngredientUnitType.MILLILITERS.id ? (amount / defaultQuantity * activeQuantity).ceil() :
+            amount / defaultQuantity * activeQuantity;
+
+        final displayAmount = (() {
+            if (foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.GRAMS.id ||
+                foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.MILLILITERS.id) {
+                return foodQuantity / 1000;
+            }
+            return foodQuantity;
+        })();
+
+        final ingredientUnitType = (() {
+            if (foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.GRAMS.id) {
+                return LookupIngredientUnitType.KILOGRAMS;
+            }
+            if (foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.MILLILITERS.id) {
+                return LookupIngredientUnitType.LITERS;
+            }
+            return LookupIngredientUnitType.dataLookup(foodConversion.unitId);
+        })();
+
+        final String unit = foodQuantity > 1 ? ingredientUnitType.plural : ingredientUnitType.singular;
+
+        if (isFirstUnit) {
+            isFirstUnit = false;
+            return "$acc$displayAmount$unit";
+        }
+
+        return "$acc($displayAmount${unit.trimRight()}) ";
     });
-    print(units);
 
     final foodName = () {
         final int lastUnitId = food.conversions.last.unitId;
@@ -169,7 +199,7 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
 
     final additionalDesc = item.additionalDesc != null ? ", ${item.additionalDesc}" : null;
 
-    final description = "$foodName";
+    final description = "$units$foodName";
 
     return Row(
         children: <Widget>[
