@@ -140,21 +140,34 @@ Widget ingredientList(List<Ingredient> ingredients, Map<String, Food> food) {
     );
 }
 
-Widget quantified(Quantified quantified, Map<String, Food> foodMap) {
-    final food = foodMap[quantified.foodId];
+Widget quantified(Quantified item, Map<String, Food> foodMap) {
     final defaultQuantity = 6;
     final activeQuantity = 6;
+
+    final food = foodMap[item.foodId];
+    final units = item.unitIds.fold("", (acc, element) {
+        final foodConversion = food.conversions.firstWhere((conversion) => conversion.unitId == element, orElse: () => null);
+
+        if (foodConversion == null) {
+            return "";
+        }
+
+        final amount = item.unitIds.length > 1 ? item.amount * foodConversion.ratio : item.amount;
+
+        return "$acc $amount";
+    });
+    print(units);
 
     final foodName = () {
         final int lastUnitId = food.conversions.last.unitId;
         if (lastUnitId == LookupIngredientUnitType.SLICE.id ||
-            lastUnitId == LookupIngredientUnitType.SINGULAR.id && quantified.amount / defaultQuantity * activeQuantity <= 1) {
+            lastUnitId == LookupIngredientUnitType.SINGULAR.id && item.amount / defaultQuantity * activeQuantity <= 1) {
             return food.name.singular;
         }
         return food.name.plural;
     }();
 
-    final additionalDesc = quantified.additionalDesc != null ? ", ${quantified.additionalDesc}" : null;
+    final additionalDesc = item.additionalDesc != null ? ", ${item.additionalDesc}" : null;
 
     final description = "$foodName";
 
