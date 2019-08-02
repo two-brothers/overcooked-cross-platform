@@ -163,7 +163,7 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
         final displayAmount = (() {
             if (foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.GRAMS.id ||
                 foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.MILLILITERS.id) {
-                return foodQuantity / 1000;
+                return (foodQuantity / 1000).toStringAsFixed(2);
             }
             return foodQuantity;
         })();
