@@ -3,6 +3,7 @@ import '../models/recipe_response_model.dart';
 import '../lookups/lookup_ingredient_type.dart';
 import '../lookups/lookup_ingredient_unit_type.dart';
 import '../models/recipe_model.dart';
+import '../models/food.dart';
 import '../services/api.dart';
 import '../utils/utils.dart';
 
