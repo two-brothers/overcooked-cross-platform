@@ -80,21 +80,27 @@ class RecipeView extends StatelessWidget {
                                                         Text(getFormattedRecipeTime(recipe.cookTime)),
                                                     ]
                                                 ),
-                                                Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: <Widget>[
-                                                        Container(
-                                                            margin: EdgeInsets.only(right: 4),
-                                                            child: Text(servesMakesHeading.toUpperCase()),
-                                                        ),
-                                                        Text(servesMakesValue.toString())
-                                                    ],
+                                                Container(
+                                                    margin: EdgeInsets.only(bottom: 24),
+                                                    child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: <Widget>[
+                                                            Container(
+                                                                margin: EdgeInsets.only(right: 4),
+                                                                child: Text(servesMakesHeading.toUpperCase()),
+                                                            ),
+                                                            Text(servesMakesValue.toString())
+                                                        ],
+                                                    ),
                                                 ),
                                                 Text("INGREDIENTS", style: TextStyle(
                                                     fontSize: 16
                                                 )),
                                                 Divider(),
-                                                ingredientSections(recipe.ingredientSections, food),
+                                                Container(
+                                                    margin: EdgeInsets.only(bottom: 16),
+                                                    child: ingredientSections(recipe.ingredientSections, food),
+                                                ),
                                                 Text("METHOD", style: TextStyle(
                                                     fontSize: 16
                                                 )),
@@ -123,7 +129,10 @@ Widget ingredientSections(List<IngredientSection> ingredientSections, Map<String
         children: ingredientSections.map((section) => new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-                if (section.heading != null) Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold)),
+                if (section.heading != null) Padding(
+                    padding: EdgeInsets.only(top: 2, bottom: 2),
+                    child: Text(section.heading, style: TextStyle(fontWeight: FontWeight.bold))
+                ),
                 ingredientList(section.ingredients, food)
             ]
         )).toList(),
@@ -202,16 +211,22 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
 
     final description = "$units$foodName";
 
-    return Row(
-        children: <Widget>[
-            Text(description),
-            if (additionalDesc != null) Text(additionalDesc, style: TextStyle(fontStyle: FontStyle.italic)),
-        ],
+    return Padding(
+        padding: EdgeInsets.only(top: 2, bottom: 2),
+        child: Row(
+            children: <Widget>[
+                Text(description),
+                if (additionalDesc != null) Text(additionalDesc, style: TextStyle(fontStyle: FontStyle.italic)),
+            ],
+        ),
     );
 }
 
 Widget freeText(FreeText freeText) {
-    return Text(freeText.description);
+    return Padding(
+        padding: EdgeInsets.only(top: 2, bottom: 2),
+        child: Text(freeText.description)
+    );
 }
 
 Widget methodList(List<String> methodList) {
