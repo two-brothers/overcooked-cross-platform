@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/recipe_response_model.dart';
-import '../lookups/lookupIngredientType.dart';
-import '../lookups/lookupIngredientUnitType.dart';
+import '../lookups/lookup_ingredient_type.dart';
+import '../lookups/lookup_ingredient_unit_type.dart';
 import '../models/recipe_model.dart';
 import '../services/api.dart';
 import '../utils/utils.dart';

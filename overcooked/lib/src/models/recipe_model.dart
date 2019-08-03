@@ -1,4 +1,4 @@
-import '../lookups/lookupIngredientType.dart';
+import '../lookups/lookup_ingredient_type.dart';
 
 class RecipeModel {
     final String id;
