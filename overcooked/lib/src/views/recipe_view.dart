@@ -4,6 +4,7 @@ import '../lookups/lookupIngredientType.dart';
 import '../lookups/lookupIngredientUnitType.dart';
 import '../models/recipe_model.dart';
 import '../services/api.dart';
+import '../utils/utils.dart';
 
 class RecipeView extends StatelessWidget {
 
@@ -165,7 +166,7 @@ Widget quantified(Quantified item, Map<String, Food> foodMap) {
                 foodQuantity >= 1000 && foodConversion.unitId == LookupIngredientUnitType.MILLILITERS.id) {
                 return (foodQuantity / 1000).toStringAsFixed(2);
             }
-            return foodQuantity;
+            return toPrettyStringFraction(foodQuantity.toDouble());
         })();
 
         final ingredientUnitType = (() {
