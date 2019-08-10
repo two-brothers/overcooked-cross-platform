@@ -30,9 +30,7 @@ class RecipeView extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(
-                title: Text("recipe"),
-            ),
+            appBar: AppBar(),
             body: FutureBuilder<RecipeResponseModel>(
                 future: Api.getRecipe(id),
                 builder: (context, snapshot) {
