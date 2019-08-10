@@ -1,6 +1,7 @@
 import 'recipe_model.dart';
+import 'package:equatable/equatable.dart';
 
-class RecipeListModel {
+class RecipeListModel extends Equatable {
     final List<RecipeModel> recipes;
 
     RecipeListModel({ this.recipes });
