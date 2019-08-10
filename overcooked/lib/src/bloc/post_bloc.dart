@@ -45,7 +45,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
               ? (currentState as PostLoaded).copyWith(hasReachedMax: true)
               : PostLoaded(
             posts: (currentState as PostLoaded).posts + posts.recipes,
-            hasReachedMax: false,
+            hasReachedMax: posts.lastPage,
           );
         }
       } catch (_) {
@@ -54,6 +54,5 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     }
   }
 
-  bool _hasReachedMax(PostState state) =>
-      state is PostLoaded && state.hasReachedMax;
+  bool _hasReachedMax(PostState state) => state is PostLoaded && state.hasReachedMax;
 }
