@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -35,17 +34,21 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if (event is Fetch && !_hasReachedMax(currentState)) {
       try {
         if (currentState is PostUninitialized) {
-          final posts = await Api.getRecipeList();
-          yield PostLoaded(posts: posts.recipes, hasReachedMax: false);
+          final posts = await Api.getRecipeList(0);
+          yield PostLoaded(
+              posts: posts.recipes,
+              hasReachedMax: false,
+              currentIndex: 0,
+          );
           return;
         }
         if (currentState is PostLoaded) {
-          final posts = await Api.getRecipeList();
-          yield posts.recipes.isEmpty
-              ? (currentState as PostLoaded).copyWith(hasReachedMax: true)
-              : PostLoaded(
+          final newIndex = (currentState as PostLoaded).currentIndex + 1;
+          final posts = await Api.getRecipeList(newIndex);
+          yield PostLoaded(
             posts: (currentState as PostLoaded).posts + posts.recipes,
             hasReachedMax: posts.lastPage,
+            currentIndex: newIndex,
           );
         }
       } catch (_) {

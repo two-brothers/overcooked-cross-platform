@@ -5,8 +5,8 @@ import 'dart:async';
 import 'dart:convert';
 
 class Api {
-    static Future<RecipeListModel> getRecipeList() async {
-        final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/at/0');
+    static Future<RecipeListModel> getRecipeList(int index) async {
+        final response = await http.get('https://overcooked.2brothers.tech/v1/recipes/at/$index');
 
         if (response.statusCode == 200) {
             return RecipeListModel.fromJson(json.decode(response.body));
